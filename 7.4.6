@@ -1,0 +1,42 @@
+class IndexValueError(Exception):
+    def __init__(self, message):
+        self.message = message
+
+    def __str__(self):
+        if self.message == 'string':
+            print(1)
+        if self.message == 'key not int':
+            print(2)
+        if self.message == 'other error with key':
+            print(3)
+        if self.message == 'other error with value':
+            print(4)
+
+
+
+class DictIntFloat():
+    def __init__(self):
+        self.__dict = {}
+
+    def __setitem__(self, key, value):
+        if isinstance(key, str) or isinstance(value, str):
+            raise IndexValueError('string')
+
+        if isinstance(key, float):
+            raise IndexValueError('key not int')
+
+        if not isinstance(key, int):
+            raise IndexValueError('other error with key')
+
+        if not isinstance(value, int) and not isinstance(value, float):
+            raise IndexValueError('other error with value')
+
+        self.__dict[key] = value
+    def __str__(self):
+        return str(self.__dict)
+
+
+a = DictIntFloat()
+a.__setitem__(1, 1)
+
+
