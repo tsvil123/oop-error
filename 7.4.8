@@ -1,0 +1,29 @@
+
+class SentenceError(Exception):
+    def __init__(self, message):
+        self.message = message
+
+
+
+    def __str__(self):
+        return f'error {self.message}'
+
+class Sentence():
+    def __init__(self, list):
+        self.list = list
+
+    def word(self):
+        for l in self.list:
+            if not isinstance(l, str):
+                raise SentenceError('not str')
+
+    def suma(self, list):
+        if not isinstance(list, Sentence) and not isinstance(list, str):
+            raise SentenceError('with summa')
+
+
+
+a = Sentence(['a b', 2])
+# a.word()
+a.suma(2)
+
